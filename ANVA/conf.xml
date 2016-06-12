@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<div>
+		<db_host>localhost</db_host>
+		<db_name>fangzhendb</db_name>
+		<db_usr>root</db_usr>
+		<db_passwd>123asd</db_passwd>
+		<db_port>3306</db_port>
+	</div>
+	<div>
+		<log_file>fangzhen.log</log_file>
+	</div>
+</root>
