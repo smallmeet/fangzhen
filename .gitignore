@@ -10,6 +10,7 @@ Desktop.ini
 *.egg-info
 dist
 build
+log
 
 # My configurations:
 # db.ini
