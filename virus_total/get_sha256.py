@@ -5,9 +5,9 @@ class Sha256Digest:
 
     # Initialise the SHA256 computation
     def __init__(self):
-        self.ihash = list()
+        self.ihash = []
         self.count = [0, 0]
-        self.buffer = list()
+        self.buffer = [0] * 64
         self.ihash.append(1779033703)
         self.ihash.append(3144134277)
         self.ihash.append(1013904242)
@@ -76,7 +76,7 @@ class Sha256Digest:
         return (b << 16) | (c & 65535)
 
     def sha256_transform(self):
-        k = list()
+        k = [0] * 16
         w = self.ihash[0]
         v = self.ihash[1]
         u = self.ihash[2]
@@ -113,7 +113,6 @@ class Sha256Digest:
 
     # Read the next chunk of data and update the SHA256 computation
     def sha256_update(self, f, d):
-        print(d)
         g = 0
         b = ((self.count[0] >> 3) & 63)
         e = (d & 63)
@@ -125,9 +124,7 @@ class Sha256Digest:
         while c < d:
             a = b
             while a < 64:
-                print(g)
-                print(f[g])
-                self.buffer[a] = f[g]  # ord(f[g])
+                self.buffer[a] = ord(f[g])
                 g += 1
                 a += 1
             self.sha256_transform()
@@ -165,7 +162,7 @@ class Sha256Digest:
 
     def sha256_encode_bytes(self):
         b = 0
-        a = list()
+        a = [0] * 32
         for c in range(8):
             a[b] = (self.ihash[c] >> 24) & 255
             b += 1
@@ -191,12 +188,13 @@ class Sha256Digest:
         with open(r'D:\apk\58dd447a48bd672fa963754cd1bdde34.apk', 'rb') as f:
             i = 0
             file_size = os.path.getsize(r'D:\apk\58dd447a48bd672fa963754cd1bdde34.apk')
+            print(file_size)
             while i < file_size:
-                i += 1024 * 1024
-                content = str(f.read(i), encoding='utf-8')
+                content = str(f.read(1024 * 1024), encoding='ISO-8859-1')
                 self.sha256_update(content, len(content))
+                i += 1024 * 1024
                 f.seek(i)
-
+        print('yyyy')
         self.sha256_final()
         return self.sha256_encode_hex()
 
